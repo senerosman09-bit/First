@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kahve Menüsü</title>
+  <style>
+    body {
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      color:#333;
+    }
+    header {
+      text-align:center;
+      padding:20px;
+      background:#333;
+      color:#fff;
+    }
+    .container {
+      max-width:900px;
+      margin:20px auto;
+      padding:0 16px;
+    }
+    h2 {
+      margin-top:30px;
+      font-size:22px;
+      border-bottom:2px solid #ccc;
+      padding-bottom:6px;
+    }
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+    .card {
+      background:#fff;
+      border-radius:8px;
+      padding:14px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      cursor:pointer;
+      transition:transform .15s ease;
+    }
+    .card:hover { transform:translateY(-3px); }
+    .icon {
+      font-size:28px;
+      margin-bottom:8px;
+    }
+    .title {
+      font-weight:bold;
+      font-size:16px;
+      margin-bottom:6px;
+    }
+    .desc {
+      font-size:14px;
+      color:#666;
+    }
+    .details {
+      display:none;
+      margin-top:10px;
+      font-size:13px;
+      color:#444;
+      border-top:1px dashed #ccc;
+      padding-top:8px;
+    }
+    .card.open .details { display:block; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kahve Menüsü</h1>
+    <p>20 farklı sıcak ve soğuk içecek</p>
+  </header>
+
+  <main class="container">
+    <h2>🔥 Sıcak İçecekler</h2>
+    <div class="grid" id="hot-grid"></div>
+
+    <h2>❄️ Soğuk İçecekler</h2>
+    <div class="grid" id="cold-grid"></div>
+  </main>
+
+  <script>
+    const hotDrinks = [
+      {name:"Espresso",icon:"☕",desc:"Yoğun ve aromatik.",details:"30 ml, yüksek yoğunluk."},
+      {name:"Ristretto",icon:"☕",desc:"Kısa ve yoğun.",details:"20 ml, ince öğütme."},
+      {name:"Lungo",icon:"☕",desc:"Uzun espresso.",details:"60–110 ml."},
+      {name:"Americano",icon:"🥤",desc:"Espresso + sıcak su.",details:"30 ml espresso + 120 ml su."},
+      {name:"Cappuccino",icon:"🥛",desc:"Espresso + süt köpüğü.",details:"1:1:1 oran."},
+      {name:"Latte Macchiato",icon:"🥛",desc:"Süt üzerine espresso.",details:"Katmanlı görünüm."},
+      {name:"Flat White",icon:"🥛",desc:"İnce süt köpüğü.",details:"Çift shot espresso."},
+      {name:"Caffè Latte",icon:"🥛",desc:"Bol sütlü.",details:"Espresso + 200 ml süt."},
+      {name:"Cortado",icon:"🥛",desc:"1:1 espresso ve süt.",details:"Dengeli asidite."},
+      {name:"Sütlü kahve",icon:"🥛",desc:"Yumuşak içim.",details:"Uzun kahve + süt."},
+      {name:"Sıcak süt",icon:"🥛",desc:"Sade sıcak süt.",details:"Orta sıcaklık."},
+      {name:"Sıcak su",icon:"💧",desc:"Çay için.",details:"Ayarlanabilir sıcaklık."}
+    ];
+
+    const coldDrinks = [
+      {name:"Iced Espresso",icon:"🧊",desc:"Buzlu espresso.",details:"Espresso + buz."},
+      {name:"Iced Americano",icon:"🧊",desc:"Espresso + soğuk su.",details:"Espresso + 150 ml su + buz."},
+      {name:"Iced Cappuccino",icon:"🧊",desc:"Soğuk süt köpüğü.",details:"LatteGo ile soğuk köpük."},
+      {name:"Iced Latte Macchiato",icon:"🧊",desc:"Soğuk süt + espresso.",details:"Katmanlı görünüm."},
+      {name:"Iced Flat White",icon:"🧊",desc:"Soğuk süt köpüğü.",details:"Çift shot espresso."},
+      {name:"Iced Caffè Latte",icon:"🧊",desc:"Bol sütlü, ferah.",details:"Espresso + 200 ml süt + buz."},
+      {name:"Iced Cortado",icon:"🧊",desc:"Soğuk espresso + süt.",details:"1:1 oran, buzlu."},
+      {name:"Iced Milk Coffee",icon:"🧊",desc:"Hafif kahve tadı.",details:"Uzun kahve + süt + buz."}
+    ];
+
+    function createCard(drink){
+      const card=document.createElement('div');
+      card.className='card';
+      card.innerHTML=`
+        <div class="icon">${drink.icon}</div>
+        <div class="title">${drink.name}</div>
+        <div class="desc">${drink.desc}</div>
+        <div class="details">${drink.details}</div>
+      `;
+      card.addEventListener('click',()=>card.classList.toggle('open'));
+      return card;
+    }
+
+    const hotGrid=document.getElementById('hot-grid');
+    const coldGrid=document.getElementById('cold-grid');
+    hotDrinks.forEach(d=>hotGrid.appendChild(createCard(d)));
+    coldDrinks.forEach(d=>coldGrid.appendChild(createCard(d)));
+  </script>
+</body>
+</html>
