@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Kahve Menüsü</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #f3e5ab, #efebe9);
+      color: #4e342e;
+    }
+
+    header {
+      text-align: center;
+      padding: 22px 16px;
+      background: linear-gradient(135deg, #6d4c41, #8d6e63);
+      color: #fff;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    main {
+      padding: 16px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      margin: 30px 0 12px;
+      font-size: 20px;
+      border-bottom: 2px solid #d7ccc8;
+      padding-bottom: 6px;
+      color: #5d4037;
+    }
+
+    /* MOBİL FIRST */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      background: #fffaf3;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 6px 14px rgba(93,64,55,0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .card:active {
+      transform: scale(0.98);
+    }
+
+    .icon {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #3e2723;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #6d4c41;
+    }
+
+    .details {
+      display: none;
+      margin-top: 10px;
+      font-size: 13px;
+      border-top: 1px dashed #bcaaa4;
+      padding-top: 8px;
+      line-height: 1.4;
+    }
+
+    .card.open .details {
+      display: block;
+    }
+
+    /* TABLET */
+    @media (min-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* DESKTOP */
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>☕ Kahve Menüsü</h1>
+
+</header>
+
+<main>
+  <h2>🔥 Sıcak Kahveler</h2>
+  <div class="grid" id="hot"></div>
+
+  <h2>❄️ Soğuk Kahveler</h2>
+  <div class="grid" id="cold"></div>
+</main>
+
+<script>
+  /* ===== 20 KAHVE ===== */
+
+  const hotDrinks = [
+    ["☕","Espresso","Yoğun ve aromatik.","30 ml klasik espresso."],
+    ["☕","Ristretto","Daha kısa ve sert.","20 ml yoğun espresso."],
+    ["☕","Lungo","Daha uzun espresso.","60–110 ml."],
+    ["🥤","Americano","Espresso + sıcak su.","Yumuşak içim."],
+    ["🥛","Cappuccino","Süt köpüklü.","1:1:1 oran."],
+    ["🥛","Latte Macchiato","Süt üzerine espresso.","Katmanlı sunum."],
+    ["🥛","Caffè Latte","Bol sütlü.","Espresso + sıcak süt."],
+    ["🥛","Flat White","İnce köpük.","Çift shot espresso."],
+    ["🥛","Cortado","Az sütlü.","1:1 espresso-süt."],
+    ["☕","Café au Lait","Kahve + süt.","Yumuşak tat."],
+    ["☕","Caffè Crema","Uzun ve yumuşak.","Kalın crema."],
+    ["☕","Espresso Lungo","Uzun shot.","Yoğun aroma."]
+  ];
+
+  const coldDrinks = [
+    ["🧊","Iced Espresso","Buzlu espresso.","Espresso + buz."],
+    ["🧊","Iced Americano","Soğuk su ile.","Espresso + su + buz."],
+    ["🧊","Iced Cappuccino","Soğuk süt köpüğü.","LatteGo ile."],
+    ["🧊","Iced Latte Macchiato","Soğuk süt + espresso.","Katmanlı."],
+    ["🧊","Iced Caffè Latte","Bol sütlü.","Espresso + süt + buz."],
+    ["🧊","Iced Flat White","Yoğun ve serin.","Çift shot."],
+    ["🧊","Iced Cortado","Az sütlü.","1:1 oran."],
+    ["🧊","Iced Café au Lait","Soğuk sütlü.","Hafif içim."]
+  ];
+
+  function createCard([icon, name, desc, detail]) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="icon">${icon}</div>
+      <div class="title">${name}</div>
+      <div class="desc">${desc}</div>
+      <div class="details">${detail}</div>
+    `;
+    card.addEventListener("click", () => card.classList.toggle("open"));
+    return card;
+  }
+
+  hotDrinks.forEach(d =>
+    document.getElementById("hot").appendChild(createCard(d))
+  );
+
+  coldDrinks.forEach(d =>
+    document.getElementById("cold").appendChild(createCard(d))
+  );
+</script>
+
+</body>
+</html>
