@@ -4,73 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kahve Menüsü</title>
+
   <style>
     body {
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#f4f4f4;
-      color:#333;
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #f3e5ab, #efebe9);
+      color: #4e342e;
     }
+
     header {
-      text-align:center;
-      padding:20px;
-      background:#333;
-      color:#fff;
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #6d4c41, #8d6e63);
+      color: #fff;
     }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
     .container {
-      max-width:900px;
-      margin:20px auto;
-      padding:0 16px;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 16px;
     }
+
     h2 {
-      margin-top:30px;
-      font-size:22px;
-      border-bottom:2px solid #ccc;
-      padding-bottom:6px;
+      margin-top: 36px;
+      font-size: 22px;
+      color: #5d4037;
+      border-bottom: 2px solid #d7ccc8;
+      padding-bottom: 6px;
     }
+
     .grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:16px;
-      margin-top:16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
     }
+
     .card {
-      background:#fff;
-      border-radius:8px;
-      padding:14px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-      cursor:pointer;
-      transition:transform .15s ease;
+      background: #fffaf3;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 6px 14px rgba(93, 64, 55, 0.25);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card:hover { transform:translateY(-3px); }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(93, 64, 55, 0.35);
+    }
+
     .icon {
-      font-size:28px;
-      margin-bottom:8px;
+      font-size: 30px;
+      margin-bottom: 10px;
     }
+
     .title {
-      font-weight:bold;
-      font-size:16px;
-      margin-bottom:6px;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #3e2723;
     }
+
     .desc {
-      font-size:14px;
-      color:#666;
+      font-size: 14px;
+      color: #6d4c41;
     }
+
     .details {
-      display:none;
-      margin-top:10px;
-      font-size:13px;
-      color:#444;
-      border-top:1px dashed #ccc;
-      padding-top:8px;
+      display: none;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #4e342e;
+      border-top: 1px dashed #bcaaa4;
+      padding-top: 10px;
+      line-height: 1.4;
     }
-    .card.open .details { display:block; }
+
+    .card.open .details {
+      display: block;
+    }
   </style>
 </head>
+
 <body>
+
   <header>
-    <h1>Kahve Menüsü</h1>
-    <p>20 farklı sıcak ve soğuk içecek</p>
+    <h1>☕ Kahve Menüsü</h1>
+    
   </header>
 
   <main class="container">
@@ -92,9 +125,9 @@
       {name:"Flat White",icon:"🥛",desc:"İnce süt köpüğü.",details:"Çift shot espresso."},
       {name:"Caffè Latte",icon:"🥛",desc:"Bol sütlü.",details:"Espresso + 200 ml süt."},
       {name:"Cortado",icon:"🥛",desc:"1:1 espresso ve süt.",details:"Dengeli asidite."},
-      {name:"Sütlü kahve",icon:"🥛",desc:"Yumuşak içim.",details:"Uzun kahve + süt."},
-      {name:"Sıcak süt",icon:"🥛",desc:"Sade sıcak süt.",details:"Orta sıcaklık."},
-      {name:"Sıcak su",icon:"💧",desc:"Çay için.",details:"Ayarlanabilir sıcaklık."}
+      {name:"Sütlü Kahve",icon:"🥛",desc:"Yumuşak içim.",details:"Uzun kahve + süt."},
+      {name:"Sıcak Süt",icon:"🥛",desc:"Sade sıcak süt.",details:"Orta sıcaklık."},
+      {name:"Sıcak Su",icon:"💧",desc:"Çay için.",details:"Ayarlanabilir sıcaklık."}
     ];
 
     const coldDrinks = [
@@ -108,24 +141,25 @@
       {name:"Iced Milk Coffee",icon:"🧊",desc:"Hafif kahve tadı.",details:"Uzun kahve + süt + buz."}
     ];
 
-    function createCard(drink){
-      const card=document.createElement('div');
-      card.className='card';
-      card.innerHTML=`
+    function createCard(drink) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
         <div class="icon">${drink.icon}</div>
         <div class="title">${drink.name}</div>
         <div class="desc">${drink.desc}</div>
         <div class="details">${drink.details}</div>
       `;
-      card.addEventListener('click',()=>card.classList.toggle('open'));
+      card.addEventListener('click', () => card.classList.toggle('open'));
       return card;
     }
 
-    const hotGrid=document.getElementById('hot-grid');
-    const coldGrid=document.getElementById('cold-grid');
-    hotDrinks.forEach(d=>hotGrid.appendChild(createCard(d)));
-    coldDrinks.forEach(d=>coldGrid.appendChild(createCard(d)));
-  </script>
-</body>
+    const hotGrid = document.getElementById('hot-grid');
+    const coldGrid = document.getElementById('cold-grid');
 
+    hotDrinks.forEach(d => hotGrid.appendChild(createCard(d)));
+    coldDrinks.forEach(d => coldGrid.appendChild(createCard(d)));
+  </script>
+
+</body>
 </html>
